@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personal Productivity & Habit Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <h1>Personal Productivity & Habit Dashboard</h1>
+      <p>Track habits, hit targets, and grow your streaks.</p>
+    </div>
+    <button id="darkModeToggle" class="btn btn-outline" type="button">Toggle Dark Mode</button>
+  </header>
+
+  <main class="layout">
+    <nav class="sidebar">
+      <a href="#add-habit">Add Habit</a>
+      <a href="#daily-entry">Daily Entry</a>
+      <a href="#analytics">Analytics Dashboard</a>
+      <a href="#monthly-progress">Monthly Progress</a>
+      <a href="#streaks">Streaks</a>
+      <a href="#manage-data">Manage Data</a>
+    </nav>
+
+    <section class="content">
+      <div class="grid cards">
+        <article class="card">
+          <h3>Total Days Tracked</h3>
+          <p id="totalDaysTracked" class="metric">0</p>
+        </article>
+        <article class="card">
+          <h3>Average Productivity Score</h3>
+          <p id="avgScore" class="metric">0</p>
+        </article>
+        <article class="card">
+          <h3>Current Streak</h3>
+          <p id="currentStreak" class="metric">0 days</p>
+        </article>
+        <article class="card">
+          <h3>Best Streak</h3>
+          <p id="bestStreak" class="metric">0 days</p>
+        </article>
+      </div>
+
+      <section id="add-habit" class="card section-card">
+        <h2>Add Custom Habit</h2>
+        <form id="habitForm" class="form-grid">
+          <label>
+            Habit Name
+            <input id="habitName" type="text" required placeholder="e.g., Study Hours">
+          </label>
+          <label>
+            Type
+            <select id="habitType">
+              <option value="number">Number</option>
+              <option value="boolean">Yes / No</option>
+            </select>
+          </label>
+          <label>
+            Target Value (optional)
+            <input id="habitTarget" type="number" min="0" step="0.1" placeholder="e.g., 4">
+          </label>
+          <button class="btn" type="submit">Add Habit</button>
+        </form>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Target</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="habitTableBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="daily-entry" class="card section-card">
+        <h2>Daily Entry</h2>
+        <form id="dailyForm">
+          <label>
+            Date
+            <input id="entryDate" type="date" required>
+          </label>
+          <div id="dailyInputs" class="daily-inputs"></div>
+          <button class="btn" type="submit">Save Day</button>
+        </form>
+      </section>
+
+      <section id="analytics" class="card section-card">
+        <h2>Analytics Dashboard</h2>
+        <div class="controls">
+          <label>
+            Select Habit for Line Chart
+            <select id="lineHabitSelect"></select>
+          </label>
+        </div>
+        <div class="chart-grid">
+          <div class="chart-card">
+            <h3>Numeric Habit Trend</h3>
+            <canvas id="lineChart"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Daily Productivity Score</h3>
+            <canvas id="barChart"></canvas>
+          </div>
+          <div class="chart-card">
+            <h3>Habit Completion (Done vs Not Done)</h3>
+            <canvas id="pieChart"></canvas>
+          </div>
+        </div>
+        <div id="habitSummary" class="summary-list"></div>
+      </section>
+
+      <section id="monthly-progress" class="card section-card">
+        <h2>Monthly Progress (Current Month)</h2>
+        <div id="monthlyStats" class="summary-list"></div>
+      </section>
+
+      <section id="streaks" class="card section-card">
+        <h2>Streak Tracking</h2>
+        <div id="streakDetails" class="summary-list"></div>
+      </section>
+
+      <section id="manage-data" class="card section-card">
+        <h2>Manage Data</h2>
+        <div class="controls">
+          <button id="exportDataBtn" class="btn btn-outline" type="button">Export Data as JSON</button>
+          <button id="resetDataBtn" class="btn btn-danger" type="button">Reset All Data</button>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
